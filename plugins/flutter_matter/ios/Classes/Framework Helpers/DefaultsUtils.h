@@ -1,0 +1,50 @@
+/**
+ *
+ *    Copyright (c) 2020 Project CHIP Authors
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
+#import <Foundation/Foundation.h>
+#import <ZGMatter/ZGMatter.h>
+
+NS_ASSUME_NONNULL_BEGIN
+
+extern NSString * const ZGMTRToolDefaultsDomain;
+extern NSString * const kNetworkSSIDDefaultsKey;
+extern NSString * const kNetworkPasswordDefaultsKey;
+extern NSString * const kFabricIdKey;
+
+ZGMTRDeviceController * _Nullable InitializeZGMTR(void);
+ZGMTRDeviceController * _Nullable ZGMTRRestartController(ZGMTRDeviceController * controller);
+id _Nullable ZGMTRGetDomainValueForKey(NSString * domain, NSString * key);
+BOOL ZGMTRSetDomainValueForKey(NSString * domain, NSString * key, id _Nullable value);
+void ZGMTRRemoveDomainValueForKey(NSString * domain, NSString * key);
+uint64_t ZGMTRGetNextAvailableDeviceID(void);
+NSString * KeyForPairedDevice(uint64_t id);
+uint64_t ZGMTRGetLastPairedDeviceId(void);
+void ZGMTRSetNextAvailableDeviceID(uint64_t id);
+void ZGMTRSetDevicePaired(uint64_t id, BOOL paired);
+BOOL ZGMTRIsDevicePaired(uint64_t id);
+BOOL ZGMTRGetConnectedDevice(ZGMTRDeviceConnectionCallback completionHandler);
+BOOL ZGMTRGetConnectedDeviceWithID(uint64_t deviceId, ZGMTRDeviceConnectionCallback completionHandler);
+void ZGMTRUnpairDeviceWithID(uint64_t deviceId);
+ZGMTRBaseDevice * _Nullable ZGMTRGetDeviceBeingCommissioned(void);
+
+@interface CHIPToolPersistentStorageDelegate : NSObject <ZGMTRPersistentStorageDelegate>
+- (nullable NSData *)storageDataForKey:(NSString *)key;
+- (BOOL)setStorageData:(NSData *)value forKey:(NSString *)key;
+- (BOOL)removeStorageDataForKey:(NSString *)key;
+@end
+
+NS_ASSUME_NONNULL_END

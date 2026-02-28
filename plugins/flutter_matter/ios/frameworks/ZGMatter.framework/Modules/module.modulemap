@@ -1,0 +1,6 @@
+framework module ZGMatter {
+  umbrella header "ZGMatter.h"
+  export *
+
+  module * { export * }
+}

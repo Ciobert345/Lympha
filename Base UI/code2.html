@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Filter Maintenance Guide | Lympha Smart-H2O</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1392ec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glow-amber { box-shadow: 0 0 20px rgba(255, 176, 0, 0.4); border: 2px solid #FFB000; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary">
+<svg fill="currentColor" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-tight">Lympha Smart-H2O</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8 items-center">
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-medium text-primary" href="#">Maintenance</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Water Quality</a>
+<a class="text-sm font-medium hover:text-primary transition-colors" href="#">Settings</a>
+</nav>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold transition-transform active:scale-95">
+<span class="truncate">Order Replacement</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-slate-700" data-alt="User profile avatar placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAthRSNPPgLYqkahgL3qfMVvYqZHhLeyjSttYZ5JTnNafLQ6Gc3tstc5AnaKJkCdnOl5_n_Am8txyjAexBy14Pe2An0VmOxyZzCK2Kphnv9SVOHeM3Hq0YRud5cpkfOt5wuy92Q1KYtnAbbwReXocWRi3XqcALv8GB7vmCLAQ-KA5K3Z8BnajuSjlV2xmlh0ykJIb15iwrRQPK-3lpFW0aCE-zn1kd9v97gOaCdOEOr8RxGVajXABrK-Hpd2Xt5CJ6P_Mn1UVfdyWI");'></div>
+</div>
+</header>
+<main class="flex-1 flex flex-col max-w-[1440px] mx-auto w-full px-4 md:px-10 py-6">
+<!-- Breadcrumbs -->
+<div class="flex flex-wrap gap-2 py-2 mb-2">
+<a class="text-slate-500 dark:text-[#92b2c9] text-sm font-medium hover:underline" href="#">Home</a>
+<span class="text-slate-400 dark:text-[#92b2c9] text-sm font-medium">/</span>
+<a class="text-slate-500 dark:text-[#92b2c9] text-sm font-medium hover:underline" href="#">Maintenance</a>
+<span class="text-slate-400 dark:text-[#92b2c9] text-sm font-medium">/</span>
+<span class="text-slate-900 dark:text-white text-sm font-medium">Filter Replacement Guide</span>
+</div>
+<!-- Page Heading -->
+<div class="flex flex-wrap justify-between items-end gap-4 mb-6">
+<div class="flex flex-col gap-1">
+<h1 class="text-slate-900 dark:text-white text-3xl md:text-4xl font-black leading-tight tracking-tight">Stage 3: Carbon Block Replacement</h1>
+<div class="flex items-center gap-3">
+<span class="flex items-center gap-1 text-[#92b2c9] text-sm">
+<span class="material-symbols-outlined text-sm">schedule</span> 5 minutes
+                    </span>
+<span class="h-1 w-1 rounded-full bg-slate-600"></span>
+<span class="flex items-center gap-1 text-amber-500 text-sm font-semibold">
+<span class="material-symbols-outlined text-sm">build</span> Maintenance Mode Active
+                    </span>
+</div>
+</div>
+<button class="flex items-center gap-2 rounded-lg h-10 px-4 bg-slate-200 dark:bg-[#233948] text-slate-900 dark:text-white text-sm font-bold transition-colors hover:bg-slate-300 dark:hover:bg-[#2d4a5d]">
+<span class="material-symbols-outlined text-sm">help_outline</span>
+<span>Help Center</span>
+</button>
+</div>
+<!-- Progress Bar -->
+<div class="bg-white dark:bg-[#192833] rounded-xl p-6 border border-slate-200 dark:border-[#325167] mb-8 shadow-sm">
+<div class="flex flex-col gap-3">
+<div class="flex gap-6 justify-between items-center">
+<p class="text-slate-900 dark:text-white text-base font-semibold">Replacement Progress</p>
+<p class="text-primary text-sm font-bold">Step 2 of 5: Extraction</p>
+</div>
+<div class="h-3 rounded-full bg-slate-100 dark:bg-[#325167] overflow-hidden">
+<div class="h-full rounded-full bg-primary transition-all duration-500" style="width: 40%;"></div>
+</div>
+<div class="flex justify-between mt-1">
+<span class="text-xs font-medium text-slate-400 dark:text-slate-500">Preparation</span>
+<span class="text-xs font-bold text-primary">Extraction</span>
+<span class="text-xs font-medium text-slate-400 dark:text-slate-500">Installation</span>
+<span class="text-xs font-medium text-slate-400 dark:text-slate-500">System Flush</span>
+<span class="text-xs font-medium text-slate-400 dark:text-slate-500">Reset</span>
+</div>
+</div>
+</div>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Panel: 3D Visualization Placeholder -->
+<div class="lg:col-span-7 flex flex-col gap-4">
+<div class="relative aspect-video lg:aspect-square bg-slate-100 dark:bg-[#16222c] rounded-2xl border border-slate-200 dark:border-[#325167] overflow-hidden group shadow-inner">
+<!-- Placeholder for 3D View -->
+<div class="absolute inset-0 flex items-center justify-center flex-col p-12">
+<div class="relative w-full h-full flex items-center justify-center">
+<!-- Simulated 5-stage system -->
+<div class="flex gap-4 items-end">
+<div class="w-12 h-48 bg-slate-300 dark:bg-slate-700 rounded-t-lg opacity-40"></div>
+<div class="w-12 h-48 bg-slate-300 dark:bg-slate-700 rounded-t-lg opacity-40"></div>
+<div class="w-16 h-56 bg-amber-500/20 dark:bg-amber-500/20 border-2 border-amber-500 rounded-t-lg glow-amber flex flex-col items-center justify-center gap-2">
+<span class="material-symbols-outlined text-amber-500 text-3xl">keyboard_double_arrow_up</span>
+<span class="text-[10px] font-black text-amber-500 uppercase tracking-widest">Stage 3</span>
+</div>
+<div class="w-12 h-48 bg-slate-300 dark:bg-slate-700 rounded-t-lg opacity-40"></div>
+<div class="w-12 h-48 bg-slate-300 dark:bg-slate-700 rounded-t-lg opacity-40"></div>
+</div>
+<!-- Base Unit -->
+<div class="absolute bottom-1/4 w-3/4 h-8 bg-slate-400 dark:bg-slate-800 rounded-full blur-xl opacity-20"></div>
+</div>
+<div class="absolute bottom-6 left-6 flex flex-col gap-1">
+<span class="text-xs font-bold text-slate-500 uppercase tracking-widest">Visual Feedback</span>
+<span class="text-sm text-slate-400">Model: Lympha X-500 Series</span>
+</div>
+<div class="absolute top-6 right-6 flex gap-2">
+<button class="size-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white border border-white/20 hover:bg-white/20 transition-colors">
+<span class="material-symbols-outlined">zoom_in</span>
+</button>
+<button class="size-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center text-white border border-white/20 hover:bg-white/20 transition-colors">
+<span class="material-symbols-outlined">3d_rotation</span>
+</button>
+</div>
+</div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none"></div>
+</div>
+<!-- Parts Table -->
+<div class="bg-white dark:bg-[#111b22] rounded-xl border border-slate-200 dark:border-[#325167] overflow-hidden">
+<div class="px-4 py-3 bg-slate-50 dark:bg-[#192833] border-b border-slate-200 dark:border-[#325167]">
+<h3 class="text-sm font-bold text-slate-900 dark:text-white">System Component Status</h3>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm">
+<thead>
+<tr class="text-slate-500 dark:text-[#92b2c9] border-b border-slate-200 dark:border-[#325167]">
+<th class="px-4 py-3 font-medium">Stage</th>
+<th class="px-4 py-3 font-medium">Filter Type</th>
+<th class="px-4 py-3 font-medium">Life Remaining</th>
+<th class="px-4 py-3 font-medium text-right">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-slate-100 dark:border-[#1e303d] hover:bg-slate-50 dark:hover:bg-[#16222c]">
+<td class="px-4 py-4 text-slate-900 dark:text-white font-medium">Stage 3</td>
+<td class="px-4 py-4 text-slate-500 dark:text-[#92b2c9]">Carbon Block (CB-10)</td>
+<td class="px-4 py-4 text-slate-500 dark:text-[#92b2c9]">0%</td>
+<td class="px-4 py-4 text-right">
+<span class="px-2 py-1 rounded bg-amber-500/10 text-amber-500 text-[10px] font-black uppercase">Replace Now</span>
+</td>
+</tr>
+<tr class="border-b border-slate-100 dark:border-[#1e303d] opacity-50">
+<td class="px-4 py-4 text-slate-900 dark:text-white font-medium">Stage 4</td>
+<td class="px-4 py-4 text-slate-500 dark:text-[#92b2c9]">RO Membrane</td>
+<td class="px-4 py-4 text-slate-500 dark:text-[#92b2c9]">64%</td>
+<td class="px-4 py-4 text-right">
+<span class="px-2 py-1 rounded bg-green-500/10 text-green-500 text-[10px] font-black uppercase">Optimal</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right Panel: Interactive Wizard -->
+<div class="lg:col-span-5 flex flex-col gap-6">
+<!-- Main Wizard Card -->
+<div class="bg-white dark:bg-[#192833] rounded-2xl border border-slate-200 dark:border-[#325167] shadow-xl overflow-hidden">
+<div class="p-6 md:p-8">
+<div class="flex items-center gap-4 mb-6">
+<div class="size-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl">settings_input_component</span>
+</div>
+<div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white">Step 2: Filter Extraction</h3>
+<p class="text-slate-500 dark:text-[#92b2c9] text-sm">Please ensure the water inlet is closed before proceeding.</p>
+</div>
+</div>
+<div class="space-y-6">
+<div class="flex gap-4 items-start p-4 bg-slate-50 dark:bg-[#111b22] rounded-xl border border-slate-200 dark:border-[#325167]">
+<span class="flex-shrink-0 size-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">A</span>
+<p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">
+                                    Locate the <strong>Stage 3 Blue Housing</strong> in the center of the manifold assembly. Use the provided filter wrench if it is hand-tight.
+                                </p>
+</div>
+<div class="flex gap-4 items-start p-4 bg-slate-50 dark:bg-[#111b22] rounded-xl border border-slate-200 dark:border-[#325167]">
+<span class="flex-shrink-0 size-8 rounded-full bg-primary text-white flex items-center justify-center font-bold text-sm">B</span>
+<p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed">
+                                    Twist the housing <strong>counter-clockwise</strong> (approximately 1/4 turn) until it clicks, then pull downwards to release.
+                                </p>
+</div>
+<!-- Alert Box -->
+<div class="bg-amber-500/10 border border-amber-500/20 p-4 rounded-xl flex gap-3">
+<span class="material-symbols-outlined text-amber-500">warning</span>
+<p class="text-xs text-amber-700 dark:text-amber-200 leading-tight">
+                                    Minor water spillage is normal during extraction. Keep a cloth handy to wipe down the base of the manifold.
+                                </p>
+</div>
+</div>
+<div class="flex gap-3 mt-10">
+<button class="flex-1 h-12 rounded-lg bg-slate-200 dark:bg-[#233948] text-slate-700 dark:text-white font-bold text-sm hover:bg-slate-300 dark:hover:bg-[#2d4a5d] transition-colors">
+                                Back
+                            </button>
+<button class="flex-[2] h-12 rounded-lg bg-primary text-white font-bold text-sm shadow-lg shadow-primary/20 hover:brightness-110 active:scale-[0.98] transition-all">
+                                Next Step: Installation
+                            </button>
+</div>
+</div>
+</div>
+<!-- Sync & Support Card -->
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white dark:bg-[#192833] rounded-2xl border border-slate-200 dark:border-[#325167] p-5 flex flex-col items-center justify-center gap-3 text-center">
+<div class="size-24 bg-white p-2 rounded-lg border border-slate-200 flex items-center justify-center">
+<!-- SVG QR Code Placeholder -->
+<svg class="w-full h-full text-slate-900" fill="currentColor" viewbox="0 0 24 24">
+<path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm13-2h3v2h-3v-2zm-3 0h2v2h-2v-2zm3 3h3v2h-3v-2zm-3 0h2v2h-2v-2zm3 3h3v2h-3v-2zm-3 0h2v2h-2v-2zM13 13h2v2h-2v-2zm0 3h2v2h-2v-2z"></path>
+</svg>
+</div>
+<div class="flex flex-col gap-1">
+<span class="text-xs font-bold text-slate-900 dark:text-white">Mobile Sync</span>
+<p class="text-[10px] text-slate-500 dark:text-[#92b2c9]">Scan to take instructions to the unit</p>
+</div>
+</div>
+<div class="bg-white dark:bg-[#192833] rounded-2xl border border-slate-200 dark:border-[#325167] p-5 flex flex-col justify-between">
+<div class="flex flex-col gap-1">
+<span class="text-xs font-bold text-slate-900 dark:text-white">Need a new filter?</span>
+<p class="text-[10px] text-slate-500 dark:text-[#92b2c9]">Overnight delivery available for Lympha Prime members.</p>
+</div>
+<button class="w-full h-9 rounded-lg border-2 border-primary text-primary text-xs font-bold hover:bg-primary/5 transition-colors">
+                            Quick Order
+                        </button>
+</div>
+</div>
+<!-- Support Footer -->
+<div class="flex items-center justify-center gap-6 py-4">
+<a class="flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-[#92b2c9] hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">videocam</span> Watch Video
+                    </a>
+<span class="w-px h-4 bg-slate-300 dark:bg-slate-700"></span>
+<a class="flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-[#92b2c9] hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">chat</span> Live Support
+                    </a>
+</div>
+</div>
+</div>
+</main>
+<!-- Global Footer -->
+<footer class="bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 py-6 mt-12">
+<div class="max-w-[1440px] mx-auto px-10 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-xs text-slate-500 dark:text-[#92b2c9]">© 2024 Lympha Smart-H2O Systems. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="text-xs text-slate-500 dark:text-[#92b2c9] hover:text-white" href="#">Safety Information</a>
+<a class="text-xs text-slate-500 dark:text-[#92b2c9] hover:text-white" href="#">Privacy Policy</a>
+<a class="text-xs text-slate-500 dark:text-[#92b2c9] hover:text-white" href="#">Technical Documentation</a>
+</div>
+</div>
+</footer>
+</body></html>

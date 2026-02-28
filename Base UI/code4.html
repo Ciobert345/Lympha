@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lympha Smart-H2O Main Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1392ec",
+                        "accent-green": "#10b981",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101a22",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .bento-item {
+            background: #16242d;
+            border: 1px solid #233948;
+            transition: all 0.3s ease;
+        }
+        .bento-item:hover {
+            border-color: #1392ec;
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px rgba(19, 146, 236, 0.2);
+        }
+        .water-gradient {
+            background: linear-gradient(180deg, #1392ec 0%, #0a4d7c 100%);
+        }
+        .eco-gradient {
+            background: linear-gradient(135deg, #10b981 0%, #065f46 100%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white selection:bg-primary/30">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-20 lg:w-64 flex flex-col bg-[#111b22] border-r border-[#233948] transition-all duration-300">
+<div class="p-6 flex items-center gap-3">
+<div class="size-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-white text-2xl">water_drop</span>
+</div>
+<div class="hidden lg:block">
+<h1 class="text-white text-lg font-bold leading-tight">Lympha</h1>
+<p class="text-[#92b2c9] text-xs font-medium">Smart-H2O</p>
+</div>
+</div>
+<nav class="flex-1 px-4 mt-6 space-y-2">
+<a class="flex items-center gap-4 px-3 py-3 rounded-xl bg-primary/10 text-primary border border-primary/20 group" href="#">
+<span class="material-symbols-outlined fill-1">dashboard</span>
+<span class="hidden lg:block font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-4 px-3 py-3 rounded-xl text-[#92b2c9] hover:bg-[#233948] hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span class="hidden lg:block font-medium">Analytics</span>
+</a>
+<a class="flex items-center gap-4 px-3 py-3 rounded-xl text-[#92b2c9] hover:bg-[#233948] hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span class="hidden lg:block font-medium">IoT Devices</span>
+</a>
+<a class="flex items-center gap-4 px-3 py-3 rounded-xl text-[#92b2c9] hover:bg-[#233948] hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<span class="hidden lg:block font-medium">Eco Wallet</span>
+</a>
+<a class="flex items-center gap-4 px-3 py-3 rounded-xl text-[#92b2c9] hover:bg-[#233948] hover:text-white transition-colors group" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="hidden lg:block font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-4">
+<button class="w-full flex items-center justify-center gap-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 py-3 rounded-xl transition-all group">
+<span class="material-symbols-outlined text-xl">power_settings_new</span>
+<span class="hidden lg:block font-bold text-sm">Emergency Shutoff</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-y-auto bg-background-light dark:bg-background-dark">
+<!-- Page Header -->
+<header class="flex flex-wrap items-center justify-between gap-4 p-8">
+<div class="flex flex-col">
+<h2 class="text-white text-4xl font-black tracking-tight">Main Dashboard</h2>
+<div class="flex items-center gap-2 mt-1">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-green opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-accent-green"></span>
+</span>
+<p class="text-[#92b2c9] text-sm">System Status: Optimal • 5 Sensors Online</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-5 py-2.5 bg-[#233948] hover:bg-[#2c485a] text-white text-sm font-bold rounded-lg transition-all">
+<span class="material-symbols-outlined text-sm">download</span>
+                        System Report
+                    </button>
+<div class="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-accent-green p-0.5">
+<div class="w-full h-full rounded-full bg-[#111b22] flex items-center justify-center overflow-hidden">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="Minimalist avatar for user profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1NUPgIVLbO367JYUfgRXpyui_8Bfz7y_o7xMNEbnAZxBHWFs-gE3OjL6D5ut9qZVPmiWuChOCNGZ1tEh7N4MCZgs7U8mI5J7GcrIr3J3_4KU8lzTmXGkoJVdbNC9ixYGbHgm-6QP4XmmhHze6PgoaiZic43oUuUgjptKuCmIuI9ZkaQOumI-h6TvxKcEe91nii_iEy75YuDwV4qPS3eYiHQJVzY71dau40npoqRiohF-CRvflZ8dcXOItQsj7tfiwKWPzRF4NSAM"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Bento Grid Layout -->
+<div class="px-8 pb-8 grid grid-cols-12 gap-6">
+<!-- 1. Health Section: Filtration (Col 1-4) -->
+<section class="col-span-12 lg:col-span-4 bento-item rounded-xl p-6 flex flex-col h-full">
+<div class="flex items-center justify-between mb-8">
+<h3 class="text-lg font-bold text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">verified_user</span>
+                            5-Stage Filtration
+                        </h3>
+<span class="text-xs font-bold text-primary bg-primary/10 px-2 py-1 rounded">HEALTHY</span>
+</div>
+<div class="flex-1 flex gap-6">
+<!-- Vertical Stepper -->
+<div class="flex flex-col items-center gap-0">
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full border-2 border-primary flex items-center justify-center bg-primary/20">
+<span class="material-symbols-outlined text-sm text-primary">filter_alt</span>
+</div>
+<div class="w-0.5 h-10 bg-primary/30"></div>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full border-2 border-primary flex items-center justify-center bg-primary/20">
+<span class="material-symbols-outlined text-sm text-primary">bolt</span>
+</div>
+<div class="w-0.5 h-10 bg-primary/30"></div>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full border-2 border-primary flex items-center justify-center bg-primary/20">
+<span class="material-symbols-outlined text-sm text-primary">blur_on</span>
+</div>
+<div class="w-0.5 h-10 bg-primary/30"></div>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full border-2 border-primary flex items-center justify-center bg-primary/20">
+<span class="material-symbols-outlined text-sm text-primary">wb_sunny</span>
+</div>
+<div class="w-0.5 h-10 bg-primary/30"></div>
+</div>
+<div class="flex flex-col items-center">
+<div class="w-10 h-10 rounded-full border-2 border-accent-green flex items-center justify-center bg-accent-green/20">
+<span class="material-symbols-outlined text-sm text-accent-green">auto_awesome</span>
+</div>
+</div>
+</div>
+<!-- Info Column -->
+<div class="flex-1 flex flex-col justify-between py-1">
+<div>
+<p class="text-sm font-bold text-white">Sediment Filter</p>
+<p class="text-xs text-[#92b2c9]">98% Life Remaining</p>
+</div>
+<div>
+<p class="text-sm font-bold text-white">Carbon Block</p>
+<p class="text-xs text-[#92b2c9]">92% Life Remaining</p>
+</div>
+<div>
+<p class="text-sm font-bold text-white">RO Membrane</p>
+<p class="text-xs text-[#92b2c9]">85% Life Remaining</p>
+</div>
+<div>
+<p class="text-sm font-bold text-white">UV Sterilization</p>
+<p class="text-xs text-[#92b2c9]">100% Active</p>
+</div>
+<div>
+<p class="text-sm font-bold text-white">Mineralization</p>
+<p class="text-xs text-[#92b2c9]">95% Enrichment</p>
+</div>
+</div>
+</div>
+<!-- Digital Twin Placeholder -->
+<div class="mt-8 rounded-xl bg-gradient-to-b from-[#1c2e3a] to-[#101a22] p-4 flex flex-col items-center justify-center border border-[#233948]">
+<div class="relative w-full h-40 overflow-hidden rounded-lg bg-[#0a1116] flex items-center justify-center">
+<div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary via-transparent to-transparent"></div>
+<div class="z-10 flex flex-col items-center">
+<span class="material-symbols-outlined text-5xl text-primary animate-pulse">waves</span>
+<p class="mt-2 text-[10px] tracking-[0.2em] text-[#92b2c9] uppercase font-bold">Digital Twin Active</p>
+</div>
+<!-- Mock Flow Lines -->
+<div class="absolute top-0 left-0 w-full h-full flex justify-around pointer-events-none opacity-10">
+<div class="w-[1px] h-full bg-primary/50"></div>
+<div class="w-[1px] h-full bg-primary/50"></div>
+<div class="w-[1px] h-full bg-primary/50"></div>
+</div>
+</div>
+<p class="mt-3 text-xs text-center text-[#92b2c9]">Real-time fluid dynamics simulation</p>
+</div>
+</section>
+<!-- 2. Wallet & Analytics (Col 5-12) -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-6">
+<!-- Top Row: Wallet & IoT Summary -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Wallet Section -->
+<div class="glass-card rounded-xl p-6 relative overflow-hidden group">
+<div class="absolute -top-12 -right-12 w-32 h-32 bg-accent-green/20 blur-3xl rounded-full transition-all group-hover:scale-150"></div>
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-lg font-bold text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-accent-green">account_balance_wallet</span>
+                                    Eco Wallet
+                                </h3>
+<button class="text-xs font-bold text-accent-green hover:underline">REDEEM</button>
+</div>
+<div class="space-y-4">
+<div class="bg-white/5 border border-white/10 rounded-lg p-4">
+<p class="text-[#92b2c9] text-xs font-medium uppercase tracking-wider">Accrued Savings</p>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-black text-white">$242.50</p>
+<span class="text-accent-green text-xs font-bold">+12% vs last mo.</span>
+</div>
+</div>
+<div class="bg-white/5 border border-white/10 rounded-lg p-4">
+<p class="text-[#92b2c9] text-xs font-medium uppercase tracking-wider">Eco-Credits Earned</p>
+<div class="flex items-baseline gap-2">
+<p class="text-3xl font-black text-accent-green">1,480</p>
+<span class="material-symbols-outlined text-accent-green text-sm">eco</span>
+</div>
+</div>
+</div>
+</div>
+<!-- IoT Ecosystem Grid -->
+<div class="bento-item rounded-xl p-6">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-[#92b2c9]">hub</span>
+                                    IoT Ecosystem
+                                </h3>
+<span class="material-symbols-outlined text-[#92b2c9] cursor-pointer">add_circle</span>
+</div>
+<div class="grid grid-cols-2 gap-3">
+<div class="bg-[#1c2e3a] p-3 rounded-lg border border-[#233948] hover:border-primary transition-colors cursor-pointer group">
+<div class="flex items-center justify-between mb-2">
+<span class="material-symbols-outlined text-primary text-xl">kitchen</span>
+<div class="w-1.5 h-1.5 rounded-full bg-accent-green"></div>
+</div>
+<p class="text-xs font-bold text-white">Kitchen Sink</p>
+<p class="text-[10px] text-[#92b2c9]">98% Flow</p>
+</div>
+<div class="bg-[#1c2e3a] p-3 rounded-lg border border-[#233948] hover:border-primary transition-colors cursor-pointer">
+<div class="flex items-center justify-between mb-2">
+<span class="material-symbols-outlined text-[#92b2c9] text-xl">bathroom</span>
+<div class="w-1.5 h-1.5 rounded-full bg-accent-green"></div>
+</div>
+<p class="text-xs font-bold text-white">Bathroom</p>
+<p class="text-[10px] text-[#92b2c9]">Stable</p>
+</div>
+<div class="bg-[#1c2e3a] p-3 rounded-lg border border-[#233948] hover:border-primary transition-colors cursor-pointer">
+<div class="flex items-center justify-between mb-2">
+<span class="material-symbols-outlined text-primary text-xl">valve</span>
+<div class="w-1.5 h-1.5 rounded-full bg-accent-green"></div>
+</div>
+<p class="text-xs font-bold text-white">Main Valve</p>
+<p class="text-[10px] text-[#92b2c9]">Open</p>
+</div>
+<div class="bg-red-500/5 p-3 rounded-lg border border-red-500/20 hover:border-red-500 transition-colors cursor-pointer">
+<div class="flex items-center justify-between mb-2">
+<span class="material-symbols-outlined text-red-500 text-xl">water_damage</span>
+<div class="w-1.5 h-1.5 rounded-full bg-red-500"></div>
+</div>
+<p class="text-xs font-bold text-white">Leak Sensor</p>
+<p class="text-[10px] text-red-400">Secure</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Area: Analytics Chart -->
+<div class="flex-1 bento-item rounded-xl p-6 flex flex-col">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h3 class="text-lg font-bold text-white">Quality Analytics</h3>
+<p class="text-xs text-[#92b2c9]">Real-time TDS &amp; Flow Rate Monitoring</p>
+</div>
+<div class="flex gap-2">
+<button class="px-3 py-1 bg-[#233948] text-white text-[10px] font-bold rounded">1H</button>
+<button class="px-3 py-1 bg-primary text-white text-[10px] font-bold rounded">24H</button>
+<button class="px-3 py-1 bg-[#233948] text-white text-[10px] font-bold rounded">7D</button>
+</div>
+</div>
+<div class="grid grid-cols-4 gap-4 mb-6">
+<div class="col-span-1">
+<p class="text-[10px] text-[#92b2c9] uppercase tracking-tighter font-bold">Avg. TDS</p>
+<p class="text-2xl font-black text-primary">12 <span class="text-xs font-medium">PPM</span></p>
+</div>
+<div class="col-span-1">
+<p class="text-[10px] text-[#92b2c9] uppercase tracking-tighter font-bold">Flow Rate</p>
+<p class="text-2xl font-black text-white">3.4 <span class="text-xs font-medium">L/m</span></p>
+</div>
+<div class="col-span-1">
+<p class="text-[10px] text-[#92b2c9] uppercase tracking-tighter font-bold">Consumption</p>
+<p class="text-2xl font-black text-white">142 <span class="text-xs font-medium">L</span></p>
+</div>
+<div class="col-span-1">
+<p class="text-[10px] text-[#92b2c9] uppercase tracking-tighter font-bold">Efficiency</p>
+<p class="text-2xl font-black text-accent-green">99.8 <span class="text-xs font-medium">%</span></p>
+</div>
+</div>
+<!-- Sophisticated Area Chart Visualization -->
+<div class="flex-1 relative bg-[#0d161d] rounded-lg border border-[#233948] overflow-hidden p-2">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<!-- Grid Lines -->
+<line stroke="#233948" stroke-width="0.1" x1="0" x2="100" y1="20" y2="20"></line>
+<line stroke="#233948" stroke-width="0.1" x1="0" x2="100" y1="40" y2="40"></line>
+<line stroke="#233948" stroke-width="0.1" x1="0" x2="100" y1="60" y2="60"></line>
+<line stroke="#233948" stroke-width="0.1" x1="0" x2="100" y1="80" y2="80"></line>
+<!-- TDS Level Area Chart -->
+<path d="M0,80 Q10,75 20,78 T40,65 T60,70 T80,55 T100,60 L100,100 L0,100 Z" fill="url(#blue-gradient)" opacity="0.4"></path>
+<path d="M0,80 Q10,75 20,78 T40,65 T60,70 T80,55 T100,60" fill="none" stroke="#1392ec" stroke-width="1"></path>
+<!-- Flow Rate Line Chart -->
+<path d="M0,40 Q10,42 20,35 T40,45 T60,30 T80,38 T100,32" fill="none" stroke="#10b981" stroke-dasharray="2,2" stroke-width="0.5"></path>
+<defs>
+<lineargradient id="blue-gradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#1392ec;stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:#1392ec;stop-opacity:0"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- Tooltip Simulation -->
+<div class="absolute top-1/2 left-2/3 -translate-y-1/2 -translate-x-1/2 bg-primary border border-white/20 px-2 py-1 rounded shadow-xl pointer-events-none">
+<p class="text-[8px] font-bold text-white">NOW: 14 PPM</p>
+</div>
+</div>
+<div class="flex justify-between mt-2 px-1">
+<span class="text-[8px] text-[#92b2c9]">00:00</span>
+<span class="text-[8px] text-[#92b2c9]">06:00</span>
+<span class="text-[8px] text-[#92b2c9]">12:00</span>
+<span class="text-[8px] text-[#92b2c9]">18:00</span>
+<span class="text-[8px] text-[#92b2c9]">23:59</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

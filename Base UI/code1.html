@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lympha Smart-H2O - CRITICAL ALERT</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#1392ec",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101a22",
+                        "emergency": "#ef4444",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .emergency-pulse {
+            background: radial-gradient(circle at center, rgba(239, 68, 68, 0.15) 0%, transparent 70%);
+        }
+        .critical-glow {
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-white min-h-screen relative overflow-x-hidden">
+<!-- Subtle Emergency Pulse Background Overlay -->
+<div class="fixed inset-0 emergency-pulse pointer-events-none"></div>
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-white/10 bg-background-dark/80 backdrop-blur-md px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-4 text-white">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 4H42V17.3333V30.6667H24V44H6V30.6667V17.3333H24V4Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Lympha Smart-H2O</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-9">
+<a class="text-white/70 hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Dashboard</a>
+<a class="text-white/70 hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Analytics</a>
+<a class="text-white/70 hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Devices</a>
+<a class="text-white/70 hover:text-white text-sm font-medium leading-normal transition-colors" href="#">Maintenance</a>
+</div>
+<div class="flex gap-2">
+<button class="flex size-10 cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-emergency/20 text-emergency animate-pulse">
+<span class="material-symbols-outlined">notifications_active</span>
+</button>
+<button class="flex size-10 cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-white/10 text-white">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border border-white/20" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCIb-EBlRa8b3fdiF9Lnq0ihjrcTJTZOemTrUpiMmPtkPwfkQSGhFI0Wx96GFCsrFC1NxEVzK4g2dHtCIRLpzxeO3Lw1SrIH-lzXs92YF15-JYLy5ta1hcAWFdIUjvQ5EnAqDLNBWQaVrXNQS-DL1j_PsaNYVilo7tBjmNGylcp-1QqeWzaaK3n4q67I1CsF7fgE6q2q8pcGSKuYWcVL-PL5ek5PF2-qMc8fdPwrx4VZngpWsO3NdRZL7Nf-EVbfSSn4boeI7_aD7k");'></div>
+</div>
+</header>
+<main class="flex-1 px-4 sm:px-10 md:px-20 lg:px-40 py-8">
+<div class="max-w-[1200px] mx-auto space-y-6">
+<!-- Critical Alert Banner -->
+<div class="flex flex-wrap items-center justify-between gap-4 p-6 bg-emergency/10 border border-emergency/30 rounded-xl critical-glow">
+<div class="flex items-start gap-4">
+<div class="bg-emergency p-3 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-3xl">warning</span>
+</div>
+<div class="flex flex-col gap-1">
+<h1 class="text-white text-4xl font-black leading-tight tracking-tight uppercase">CRITICAL ALERT: CONTAMINANT THRESHOLD EXCEEDED</h1>
+<p class="text-emergency font-bold text-lg">Immediate Action Required: PFAS levels detected at 450% above safety limits.</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-2">
+<span class="bg-emergency text-white px-3 py-1 rounded text-xs font-bold uppercase tracking-widest">Status: Emergency Protocol Active</span>
+<span class="text-white/50 text-sm">Detected: 2 minutes ago</span>
+</div>
+</div>
+<!-- Main Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Left: 3D System View (Spans 2 columns) -->
+<div class="lg:col-span-2 space-y-6">
+<div class="bg-background-dark/60 border border-white/10 rounded-xl overflow-hidden @container">
+<div class="p-6">
+<h3 class="text-white text-xl font-bold mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">view_in_ar</span>
+                                        Real-time System Diagnostics
+                                    </h3>
+<div class="relative aspect-video w-full rounded-lg overflow-hidden bg-black/40 border border-emergency/50">
+<!-- Simulated 3D View with Failure Hotspot -->
+<div class="absolute inset-0 bg-center bg-no-repeat bg-cover opacity-60 mix-blend-screen" data-alt="3D wireframe of a water filtration unit with internal failure" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAgPXJdOgPTXxXEeop3VmLzNk1BrkAwMfLxHP1FU6hE5tjSDyDsfSyM3dmArAe_gwul_XM51Wro5h5LZxPLkuFXaJfZWt2--eoceFagXxxKPJ3RiB29-o6y_sbz_UoeNLlQopAML16Z-k27TlMLz-LdpJKh0eirdnK62v1ZBFSY8HYdoeRQPsTXUSFmYfLkvkY9QUUDzwIqcenignppg3lsNoV-8Q5OwzrvR15BoCOL-4Wp4-VVXn4Ep4-jxgEU8eN5b8pA0ZRsJ_c");'></div>
+<!-- Overlay Failure Indicators -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none">
+<div class="size-24 rounded-full bg-emergency/20 border-2 border-emergency animate-ping flex items-center justify-center">
+<div class="size-8 rounded-full bg-emergency shadow-[0_0_15px_#ef4444]"></div>
+</div>
+<div class="mt-4 bg-emergency px-3 py-1 rounded-full text-white font-bold text-xs uppercase tracking-tighter">PFAS BYPASS DETECTED</div>
+</div>
+<div class="absolute bottom-4 left-4 flex flex-col gap-2">
+<div class="flex items-center gap-2 bg-black/80 p-2 rounded border border-white/10">
+<span class="material-symbols-outlined text-emergency text-sm">error</span>
+<span class="text-xs text-white/90 font-mono tracking-tighter">FILTER_02: STATUS_FAILURE</span>
+</div>
+<div class="flex items-center gap-2 bg-black/80 p-2 rounded border border-white/10">
+<span class="material-symbols-outlined text-primary text-sm">check_circle</span>
+<span class="text-xs text-white/90 font-mono tracking-tighter">PRE_FILTER: STATUS_OPTIMAL</span>
+</div>
+</div>
+</div>
+<div class="mt-6 grid grid-cols-2 gap-4">
+<div class="p-4 rounded-lg bg-emergency/5 border border-emergency/20">
+<p class="text-white/60 text-xs uppercase font-bold tracking-wider mb-1">Filter Cartridge 02</p>
+<p class="text-emergency text-lg font-bold">STATE: FAILURE</p>
+<p class="text-white/40 text-xs mt-1 italic">Structural integrity compromised at primary stage.</p>
+</div>
+<div class="p-4 rounded-lg bg-white/5 border border-white/10">
+<p class="text-white/60 text-xs uppercase font-bold tracking-wider mb-1">Membrane Integrity</p>
+<p class="text-orange-400 text-lg font-bold">STATE: CRITICAL</p>
+<p class="text-white/40 text-xs mt-1 italic">High pressure backflow detected.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Action Center -->
+<div class="bg-background-dark/60 border border-emergency/40 rounded-xl p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex-1">
+<h3 class="text-2xl font-black text-white mb-2 uppercase">Protocol Override</h3>
+<p class="text-white/60">The main intake valve is currently <span class="text-green-400 font-bold">OPEN</span>. Manual override required to stop contaminated flow.</p>
+</div>
+<div class="flex flex-wrap gap-4 w-full md:w-auto">
+<button class="flex-1 md:flex-initial min-w-[200px] bg-emergency hover:bg-red-700 text-white h-16 rounded-xl flex items-center justify-center gap-3 transition-all transform hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(239,68,68,0.5)]">
+<span class="material-symbols-outlined font-bold">block</span>
+<span class="text-lg font-black uppercase tracking-wider">Shut Off Valve</span>
+</button>
+<button class="flex-1 md:flex-initial min-w-[200px] bg-white/10 hover:bg-white/20 text-white h-16 rounded-xl border border-white/20 flex items-center justify-center gap-3 transition-all">
+<span class="material-symbols-outlined">engineering</span>
+<span class="text-lg font-bold">Call Technician</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Right Column: Analytics & Stats -->
+<div class="space-y-6">
+<!-- Contaminant Spike Chart -->
+<div class="bg-background-dark/60 border border-white/10 rounded-xl p-6">
+<p class="text-white/60 text-sm font-bold uppercase tracking-widest mb-2">Contaminant Pulse</p>
+<div class="flex items-end justify-between mb-6">
+<h4 class="text-white text-4xl font-black">450%</h4>
+<div class="flex items-center text-emergency font-bold text-lg">
+<span class="material-symbols-outlined">trending_up</span>
+<span>+340.2%</span>
+</div>
+</div>
+<div class="h-48 w-full relative">
+<svg class="h-full w-full overflow-visible" preserveaspectratio="none" viewbox="0 0 100 100">
+<!-- Grid Lines -->
+<line stroke="rgba(239, 68, 68, 0.3)" stroke-dasharray="2" stroke-width="0.5" x1="0" x2="100" y1="20" y2="20"></line>
+<text fill="rgba(239, 68, 68, 0.5)" font-size="3" font-weight="bold" x="-5" y="22">LIMIT</text>
+<!-- Gradient Fill -->
+<defs>
+<lineargradient id="spikeGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#ef4444" stop-opacity="0.5"></stop>
+<stop offset="100%" stop-color="#ef4444" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<!-- Path -->
+<path d="M0 90 L10 88 L20 85 L30 87 L40 82 L50 84 L60 78 L70 75 L80 10 L100 5 L100 100 L0 100 Z" fill="url(#spikeGradient)"></path>
+<path d="M0 90 L10 88 L20 85 L30 87 L40 82 L50 84 L60 78 L70 75 L80 10 L100 5" fill="none" stroke="#ef4444" stroke-linecap="round" stroke-width="2"></path>
+<!-- Highlight Circle -->
+<circle cx="80" cy="10" fill="#ef4444" r="1.5"></circle>
+</svg>
+</div>
+<div class="flex justify-between mt-4">
+<span class="text-white/40 text-[10px] font-bold">14:00</span>
+<span class="text-white/40 text-[10px] font-bold">14:15</span>
+<span class="text-white/40 text-[10px] font-bold">14:30</span>
+<span class="text-emergency text-[10px] font-black">NOW</span>
+</div>
+</div>
+<!-- Alert Logs -->
+<div class="bg-background-dark/60 border border-white/10 rounded-xl p-6">
+<h4 class="text-white text-sm font-bold uppercase tracking-widest mb-4">Event History</h4>
+<div class="space-y-4">
+<div class="flex gap-4 border-l-2 border-emergency pl-4 py-1">
+<div class="flex-1">
+<p class="text-white font-bold text-sm">PFAS Threshold Breach</p>
+<p class="text-white/40 text-xs">Sensor ID: ST-9022X</p>
+</div>
+<p class="text-white/60 text-xs font-mono">14:42:01</p>
+</div>
+<div class="flex gap-4 border-l-2 border-orange-500 pl-4 py-1">
+<div class="flex-1">
+<p class="text-white font-bold text-sm">Pressure Drop Alert</p>
+<p class="text-white/40 text-xs">Stage 2 Output</p>
+</div>
+<p class="text-white/60 text-xs font-mono">14:41:50</p>
+</div>
+<div class="flex gap-4 border-l-2 border-primary pl-4 py-1">
+<div class="flex-1">
+<p class="text-white font-bold text-sm">System Self-Test</p>
+<p class="text-white/40 text-xs">Automatic Cycle</p>
+</div>
+<p class="text-white/60 text-xs font-mono">14:30:00</p>
+</div>
+</div>
+<button class="w-full mt-6 py-2 text-primary font-bold text-sm hover:underline">View All Diagnostics</button>
+</div>
+<!-- Risk Assessment -->
+<div class="bg-gradient-to-br from-emergency/20 to-transparent border border-emergency/30 rounded-xl p-6">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-emergency">report_problem</span>
+<h4 class="text-white font-black text-sm uppercase">Risk Assessment</h4>
+</div>
+<div class="space-y-3">
+<div>
+<div class="flex justify-between text-xs mb-1">
+<span class="text-white/80">Water Safety Grade</span>
+<span class="text-emergency font-bold">GRADE F</span>
+</div>
+<div class="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-emergency w-[95%]"></div>
+</div>
+</div>
+<p class="text-white/50 text-[11px] leading-relaxed">
+                                        Concentration of PFAS exceeds health advisory levels by 4x. Ingestion highly discouraged. Distribution should be ceased immediately.
+                                    </p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Status Bar -->
+<footer class="bg-background-dark border-t border-white/5 py-3 px-10 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-emergency animate-pulse"></div>
+<span class="text-white/60 text-xs font-bold uppercase tracking-widest">Live Monitoring: ACTIVE</span>
+</div>
+<div class="h-4 w-px bg-white/10"></div>
+<span class="text-white/40 text-xs">Device ID: LYM-902-ST</span>
+</div>
+<div class="flex items-center gap-6">
+<span class="text-white/40 text-xs font-mono">LAT: 34.0522° N | LON: 118.2437° W</span>
+<span class="text-white/60 text-xs">Firmware: v4.2.0-ALERT_MODE</span>
+</div>
+</footer>
+</div>
+</div>
+</body></html>
