@@ -12,6 +12,8 @@ import 'analytics_screen.dart';
 import 'devices_screen.dart';
 import 'maintenance_screen.dart';
 import 'profile_screen.dart';
+import 'system_settings_screen.dart';
+import 'home_builder.dart';
 import '../widgets/notification_overlay.dart';
 
 class DashboardScreen extends ConsumerWidget {
@@ -42,6 +44,9 @@ class DashboardScreen extends ConsumerWidget {
         break;
       case 3:
         body = const MaintenanceScreen();
+        break;
+      case 4:
+        body = const SystemSettingsScreen();
         break;
       default:
         body = _buildDashboardContent(context, credits, savings, hasCriticalAlert, sensorData);
@@ -215,8 +220,9 @@ class DashboardScreen extends ConsumerWidget {
                 children: [
                   _buildSidebarItem(ref, Icons.dashboard_outlined, Icons.dashboard, "Dashboard", 0, selectedIndex, isNarrowDesktop),
                   _buildSidebarItem(ref, Icons.bar_chart_outlined, Icons.bar_chart, "Analytics", 1, selectedIndex, isNarrowDesktop),
-                  _buildSidebarItem(ref, Icons.sensors_outlined, Icons.sensors, "Devices", 2, selectedIndex, isNarrowDesktop),
+                  _buildSidebarItem(ref, Icons.sensors_outlined, Icons.sensors, "Dispositivi", 2, selectedIndex, isNarrowDesktop),
                   _buildSidebarItem(ref, Icons.build_circle_outlined, Icons.build_circle, "Manutenzione", 3, selectedIndex, isNarrowDesktop),
+                  _buildSidebarItem(ref, Icons.settings_suggest_outlined, Icons.settings_suggest, "Sistema", 4, selectedIndex, isNarrowDesktop),
                 ],
               ),
             ),
@@ -334,8 +340,8 @@ class DashboardScreen extends ConsumerWidget {
           duration: const Duration(milliseconds: 150),
           margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
           padding: EdgeInsets.symmetric(
-            horizontal: compact ? 12 : 14,
-            vertical: 10,
+            horizontal: compact ? 12 : 16,
+            vertical: 14,
           ),
           decoration: BoxDecoration(
             color: isSelected ? LymphaConfig.primaryBlue.withValues(alpha: 0.12) : Colors.transparent,
@@ -401,6 +407,11 @@ class DashboardScreen extends ConsumerWidget {
             icon: Icon(Icons.build_circle_outlined, color: Colors.white38),
             selectedIcon: Icon(Icons.build_circle, color: LymphaConfig.primaryBlue),
             label: "Assist.",
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.settings_suggest_outlined, color: Colors.white38),
+            selectedIcon: Icon(Icons.settings_suggest, color: LymphaConfig.primaryBlue),
+            label: "Sist.",
           ),
         ],
       ),
@@ -554,7 +565,7 @@ class DashboardScreen extends ConsumerWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(18),
+        borderRadius: BorderRadius.circular(24),
         border: Border.all(color: LymphaConfig.primaryBlue.withValues(alpha: 0.2)),
       ),
       child: Column(
@@ -619,7 +630,7 @@ class DashboardScreen extends ConsumerWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(item.value, style: TextStyle(color: item.color, fontSize: 32, fontWeight: FontWeight.w900, height: 1)),
+            Text(item.value, style: TextStyle(color: item.color, fontSize: 38, fontWeight: FontWeight.w900, height: 1)),
             const SizedBox(width: 4),
             Padding(
               padding: const EdgeInsets.only(bottom: 4),
@@ -660,7 +671,7 @@ class DashboardScreen extends ConsumerWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  Text(item.value, style: TextStyle(color: item.color, fontSize: 22, fontWeight: FontWeight.w900, height: 1.1)),
+                  Text(item.value, style: TextStyle(color: item.color, fontSize: 26, fontWeight: FontWeight.w900, height: 1.1)),
                   const SizedBox(width: 4),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 2),
@@ -754,27 +765,30 @@ class DashboardScreen extends ConsumerWidget {
 
         return Column(
           children: [
-            const DigitalTwinView(),
+            DigitalTwinView(),
             const SizedBox(height: 16),
             Row(
               children: [
                 Expanded(
                   child: _buildQuickAction(
                     Icons.build_circle_outlined, "Manutenzione", Colors.orangeAccent,
+                    onTap: () => ref.read(navigationIndexProvider.notifier).state = 3,
                     subtitle: filterSubtitle,
                   ),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: 14),
                 Expanded(
                   child: _buildQuickAction(
                     Icons.home_work_outlined, "Builder", LymphaConfig.primaryBlue,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => HomeBuilderScreen())),
                     subtitle: "Gestisci layout",
                   ),
                 ),
-                const SizedBox(width: 12),
+                const SizedBox(width: 14),
                 Expanded(
                   child: _buildQuickAction(
                     Icons.sensors_outlined, "Sensori", Colors.tealAccent,
+                    onTap: () => ref.read(navigationIndexProvider.notifier).state = 2,
                     subtitle: deviceSubtitle,
                   ),
                 ),
@@ -786,23 +800,27 @@ class DashboardScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildQuickAction(IconData icon, String label, Color color, {String subtitle = ""}) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-      decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.06),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: color.withValues(alpha: 0.15)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(icon, color: color, size: 20),
-          const SizedBox(height: 8),
-          Text(label, style: TextStyle(color: color, fontWeight: FontWeight.bold, fontSize: 12)),
-          if (subtitle.isNotEmpty)
-            Text(subtitle, style: const TextStyle(color: Colors.white38, fontSize: 10)),
-        ],
+  Widget _buildQuickAction(IconData icon, String label, Color color, {String subtitle = "", VoidCallback? onTap}) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(14),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+        decoration: BoxDecoration(
+          color: color.withValues(alpha: 0.06),
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: color.withValues(alpha: 0.15)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(icon, color: color, size: 24),
+            const SizedBox(height: 10),
+            Text(label, style: TextStyle(color: color, fontWeight: FontWeight.bold, fontSize: 13)),
+            if (subtitle.isNotEmpty)
+              Text(subtitle, style: const TextStyle(color: Colors.white38, fontSize: 10)),
+          ],
+        ),
       ),
     );
   }

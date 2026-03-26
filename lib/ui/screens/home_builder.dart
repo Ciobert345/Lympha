@@ -21,6 +21,11 @@ class _HomeBuilderScreenState extends ConsumerState<HomeBuilderScreen> {
 
   Offset? _dragStart;
   Offset? _initialPos;
+  DateTime _lastUpdate = DateTime.now();
+
+  // Optimized dragging state
+  final ValueNotifier<Offset?> _draggedRoomOffset = ValueNotifier<Offset?>(null);
+  String? _draggedRoomId;
 
   @override
   void initState() {
@@ -118,9 +123,12 @@ class _HomeBuilderScreenState extends ConsumerState<HomeBuilderScreen> {
   }
 
 
-  void _updateRoomPosition(String id, Offset newPos) {
-    double snappedX = (newPos.dx / 20).round() * 20.0;
-    double snappedY = (newPos.dy / 20).round() * 20.0;
+  void _updateRoomPosition(String id, Offset newPos, {bool finalUpdate = false, double? snappedX, double? snappedY}) {
+    // Throttled update to provider only happens at the end or occasionally
+    if (!finalUpdate) {
+       _draggedRoomOffset.value = snappedX != null ? Offset(snappedX!, snappedY!) : newPos;
+       return;
+    }
 
     final state = ref.read(homeLayoutProvider);
     final layout = state.layout;
@@ -128,21 +136,24 @@ class _HomeBuilderScreenState extends ConsumerState<HomeBuilderScreen> {
     if (roomIdx == -1) return;
     final currentRoom = layout.rooms[roomIdx];
 
-    // Room-to-Room Snap
+    // Final snapping logic (same as before)
+    double fx = snappedX ?? newPos.dx;
+    double fy = snappedY ?? newPos.dy;
+    
     for (var other in layout.rooms) {
       if (other.id == id) continue;
       final otherRight = other.position.dx + (other.width * 20);
       final otherBottom = other.position.dy + (other.length * 20);
       
-      if ((snappedX - otherRight).abs() < 15) snappedX = otherRight;
-      if ((snappedX + (currentRoom.width * 20) - other.position.dx).abs() < 15) snappedX = other.position.dx - (currentRoom.width * 20);
-      if ((snappedY - otherBottom).abs() < 15) snappedY = otherBottom;
-      if ((snappedY + (currentRoom.length * 20) - other.position.dy).abs() < 15) snappedY = other.position.dy - (currentRoom.length * 20);
+      if ((fx - otherRight).abs() < 15) fx = otherRight;
+      if ((fx + (currentRoom.width * 20) - other.position.dx).abs() < 15) fx = other.position.dx - (currentRoom.width * 20);
+      if ((fy - otherBottom).abs() < 15) fy = otherBottom;
+      if ((fy + (currentRoom.length * 20) - other.position.dy).abs() < 15) fy = other.position.dy - (currentRoom.length * 20);
     }
 
     ref.read(homeLayoutProvider.notifier).updateLayout(
       layout.copyWith(rooms: layout.rooms.map((room) {
-        return room.id == id ? room.copyWith(position: Offset(snappedX, snappedY)) : room;
+        return room.id == id ? room.copyWith(position: Offset(fx, fy)) : room;
       }).toList()),
     );
   }
@@ -188,17 +199,19 @@ class _HomeBuilderScreenState extends ConsumerState<HomeBuilderScreen> {
             maxScale: 4.0,
             constrained: false,
             clipBehavior: Clip.none,
-            child: SizedBox(
-              width: 5000,
-              height: 5000,
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  _buildCanvasFloor(),
-                  _buildGridBackground(),
-                  ...layout.rooms.map((room) => _buildRoomWidget(room)),
-                  ...layout.sensors.map((s) => _buildPlottedSensor(s)),
-                ],
+            child: RepaintBoundary(
+              child: SizedBox(
+                width: 5000,
+                height: 5000,
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    _buildCanvasFloor(),
+                    _buildGridBackground(),
+                    ...layout.rooms.map((room) => _buildRoomWidget(room)),
+                    ...layout.sensors.map((s) => _buildPlottedSensor(s)),
+                  ],
+                ),
               ),
             ),
           ),
@@ -619,24 +632,41 @@ class _HomeBuilderScreenState extends ConsumerState<HomeBuilderScreen> {
     final isCorridor = room.type == RoomType.corridor;
     final baseColor = isCorridor ? Colors.tealAccent : LymphaConfig.primaryBlue;
 
-    return Positioned(
-      left: room.position.dx,
-      top: room.position.dy,
-      child: GestureDetector(
-        onPanStart: (det) {
-          _dragStart = det.globalPosition;
-          _initialPos = room.position;
-        },
-        onPanUpdate: (det) {
-          if (_dragStart != null && _initialPos != null) {
-            final viewportScale = _transformationController.value.getMaxScaleOnAxis();
-            final delta = (det.globalPosition - _dragStart!) / viewportScale;
-            _updateRoomPosition(room.id, _initialPos! + delta);
-          }
-        },
-        onDoubleTap: () => _showEditRoomDialog(room),
-        onLongPress: () => _showRoomOptions(room),
-        child: ClipRRect(
+    return ValueListenableBuilder<Offset?>(
+      valueListenable: _draggedRoomOffset,
+      builder: (context, localOffset, child) {
+        final position = (_draggedRoomId == room.id && localOffset != null) ? localOffset : room.position;
+        
+        return Positioned(
+          left: position.dx,
+          top: position.dy,
+          child: RepaintBoundary(
+            child: GestureDetector(
+            onPanStart: (det) {
+              _dragStart = det.globalPosition;
+              _initialPos = room.position;
+              _draggedRoomId = room.id;
+              _draggedRoomOffset.value = room.position;
+            },
+            onPanUpdate: (det) {
+              if (_dragStart != null && _initialPos != null) {
+                final viewportScale = _transformationController.value.getMaxScaleOnAxis();
+                final delta = (det.globalPosition - _dragStart!) / viewportScale;
+                _updateRoomPosition(room.id, _initialPos! + delta);
+              }
+            },
+            onPanEnd: (_) {
+              if (_dragStart != null && _initialPos != null) {
+                _updateRoomPosition(room.id, _draggedRoomOffset.value ?? room.position, finalUpdate: true);
+              }
+              _dragStart = null;
+              _initialPos = null;
+              _draggedRoomId = null;
+              _draggedRoomOffset.value = null;
+            },
+            onDoubleTap: () => _showEditRoomDialog(room),
+            onLongPress: () => _showRoomOptions(room),
+            child: ClipRRect(
           borderRadius: BorderRadius.circular(isCorridor ? 4 : 8),
           child: Container(
             width: room.width * 20,
@@ -701,8 +731,11 @@ class _HomeBuilderScreenState extends ConsumerState<HomeBuilderScreen> {
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+},
+);
+}
 
   Widget _buildPlottedSensor(PlottedSensor sensor) {
     return Positioned(

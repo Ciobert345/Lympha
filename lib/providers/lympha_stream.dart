@@ -25,9 +25,22 @@ final sensorDataProvider = StreamProvider<SensorData>((ref) {
     // Real-time stream from Supabase 'measurements' table
     final controller = StreamController<SensorData>();
     
+    // We try to get the first device to filter data
+    final devicesAsync = ref.watch(deviceListProvider);
+    final selectedDeviceId = devicesAsync.value?.isNotEmpty == true 
+        ? devicesAsync.value!.first.id 
+        : null;
+
+    if (selectedDeviceId == null) {
+      return const Stream.empty();
+    }
+    
+    debugPrint("📡 LymphaStream: Ascoltando dati per $selectedDeviceId");
+
     final subscription = SupabaseService.client
         .from('measurements')
         .stream(primaryKey: ['id'])
+        .eq('device_id', selectedDeviceId) // <--- Filtering added
         .order('created_at')
         .limit(1)
         .listen((data) {

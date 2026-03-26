@@ -22,17 +22,19 @@ class DigitalTwinView extends ConsumerWidget {
           border: Border.all(color: Colors.white10),
         ),
         clipBehavior: Clip.antiAlias,
-        child: Stack(
-          children: [
-            if (homeState.isLoading)
-              const Center(child: CircularProgressIndicator())
-            else if (homeLayout.rooms.isEmpty)
-              _buildEmptyState(context)
-            else
-              _buildIsometricHome(homeLayout),
-
-            _buildStatusOverlay(context),
-          ],
+        child: RepaintBoundary(
+          child: Stack(
+            children: [
+              if (homeState.isLoading)
+                const Center(child: CircularProgressIndicator())
+              else if (homeLayout.rooms.isEmpty)
+                _buildEmptyState(context)
+              else
+                _buildIsometricHome(homeLayout),
+  
+              _buildStatusOverlay(context),
+            ],
+          ),
         ),
       ),
     );
@@ -236,5 +238,7 @@ class IsometricHousePainter extends CustomPainter {
   double _isoY(double x, double y) => (x + y) * 0.5;
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
+  bool shouldRepaint(IsometricHousePainter oldDelegate) {
+    return oldDelegate.layout != layout;
+  }
 }

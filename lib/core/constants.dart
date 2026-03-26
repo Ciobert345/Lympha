@@ -10,6 +10,7 @@ class LymphaConfig {
   // Design Tokens
   static const Color primaryBlue = Color(0xFF1392EC);
   static const Color backgroundDark = Color(0xFF101A22);
+  static const Color backgroundDarker = Color(0xFF080D11);
   static const Color emergencyRed = Color(0xFFEF4444);
   static const Color accentGreen = Color(0xFF4ADE80);
 }

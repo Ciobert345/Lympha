@@ -105,6 +105,15 @@ class SupabaseService {
     }
   }
 
+  static Future<void> saveDevice(Map<String, dynamic> deviceData) async {
+    final userId = client.auth.currentUser?.id;
+    if (userId != null) {
+      deviceData['user_id'] = userId;
+      // Map frontend fields to DB fields if necessary
+      await client.from('devices').upsert(deviceData);
+    }
+  }
+
   /// Saves the entire layout (rooms and sensors) in bulk to ensure consistency.
   static Future<void> saveLayoutBulk({
     required List<Map<String, dynamic>> rooms,
@@ -135,7 +144,7 @@ class SupabaseService {
       // 3. Upsert Sensors
       if (sensors.isNotEmpty) {
         final sensorsWithUser = sensors.map((s) => {...s, 'user_id': userId}).toList();
-        await client.from('plotted_sensors').upsert(sensorsWithUser);
+        await client.from('plotted_sensors').upsert(sensorsWithUser, onConflict: 'device_id');
       }
 
       // 4. Delete orphaned sensors
@@ -161,5 +170,26 @@ class SupabaseService {
     final userId = client.auth.currentUser?.id;
     if (userId == null) return;
     await client.from('notifications').update({'is_read': true}).eq('user_id', userId);
+  }
+
+  // Measurement methods
+  static Future<void> sendMeasurement({
+    required String deviceId,
+    required double flowRate,
+    required double totalConsumed,
+    required bool leakAlert,
+  }) async {
+    try {
+      await client.from('measurements').insert({
+        'device_id': deviceId,
+        'flow_rate': flowRate,
+        'total_consumed': totalConsumed,
+        'leak_alert': leakAlert,
+        'timestamp': DateTime.now().toIso8601String(),
+      });
+      debugPrint("📊 Measurement sent: $deviceId -> $flowRate L/min");
+    } catch (e) {
+      debugPrint("🔴 Error sending measurement: $e");
+    }
   }
 }

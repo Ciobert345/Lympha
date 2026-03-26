@@ -43,7 +43,11 @@ dependencies:
   flutter_matter:
     path: plugins/flutter_matter
   supabase_flutter: ^2.8.1
+  flutter_blue_plus: ^1.31.0
+  flutter_libserialport: ^0.4.0
   image_picker: ^1.1.2
+  shared_preferences: ^2.5.5
+  connectivity_plus: ^6.1.1
 
 
 
