@@ -4,7 +4,7 @@
 > Un sistema IoT per il monitoraggio intelligente del consumo idrico domestico, con Digital Twin 3D in tempo reale.
 
 **Progetto scolastico** realizzato per [Mega Hub](https://www.megahub.it/)  
-**Team:** Ciobanu · Biasi · Caldana · Viceconte V
+**Team:** Ciobanu Robert · Biasi Alessandro · Caldana Lorenzo · Viceconte Veronica
 
 ---
 
