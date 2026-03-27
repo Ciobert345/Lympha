@@ -244,10 +244,10 @@ Progetto sviluppato nell'ambito del percorso scolastico presso **[Mega Hub](http
 
 | Nome | Ruolo |
 |---|---|
-| **Ciobanu** | Lead Developer |
-| **Biasi** | Hardware & IoT |
-| **Caldana** | UI/UX Design |
-| **Viceconte V** | Backend & Cloud |
+| **Ciobanu** | Lead Developer, Hardware &IoT, Cloud infrastructure |
+| **Biasi** | Beta tester |
+| **Caldana** | PM |
+| **Viceconte V** | UI/UX Design |
 
 ---
 
